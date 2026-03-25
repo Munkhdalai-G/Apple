@@ -1,0 +1,487 @@
+/* ─────────────────────────────────────────────
+   RESET
+───────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, "SF Pro Display", Helvetica, Arial, sans-serif;
+  background: #fff;
+  color: #1d1d1f;
+}
+
+/* ─────────────────────────────────────────────
+   NAVBAR
+───────────────────────────────────────────── */
+.navi {
+  width: 100%;
+  height: 48px;
+  background: rgba(245,245,247,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 4px;
+}
+.nav-apple {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+/* desktop links — hidden until 1000px */
+.nav-links { display: none; }
+.nav-links span {
+  font-size: 12px;
+  color: #1d1d1f;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color .2s;
+}
+.nav-links span:hover { color: #6e6e73; }
+
+.nav-icons {
+  display: flex;
+  align-items: center; gap: 15px; 
+}
+.nav-icons svg { cursor: pointer; opacity: .8; transition: opacity .2s; }
+.nav-icons svg:hover { opacity: 1; }
+
+.hamburger {
+  width: 30px; height: 30px;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  gap: 6px; cursor: pointer;
+}
+.hamburger span {
+  display: block; width: 14px;
+  border: 1.2px solid #000;
+  border-radius: 1px;
+}
+
+/* ─────────────────────────────────────────────
+   NOTICE
+───────────────────────────────────────────── */
+.notice {
+  width: 100%;
+  min-height: 52px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 8px 20px;
+}
+
+/* ─────────────────────────────────────────────
+   POSTER  (mobile-first)
+   Text is placed with flexbox — no fixed px offsets
+───────────────────────────────────────────── */
+.poster {
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  /* default: text near bottom */
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 16px 36px;
+}
+
+/* poster-content: the inner text+button block */
+.poster-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  width: 100%;
+}
+.poster-content.align-left {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* typography */
+.ptitle {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.psub {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.4;
+  max-width: 300px;
+}
+.light { color: #f5f5f7; }
+.dark  { color: #1d1d1f; }
+
+/* watch helpers */
+.apple-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.apple-icon { width: 18px; height: auto; }
+.series {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+/* iPad logo + colorful text */
+.ipad-logo { height: 40px; object-fit: contain; }
+.colorful {
+  font-size: 13px;
+  font-weight: 500;
+  background: linear-gradient(90deg,#0090f7 0%,#ba62fc 33%,#f2416b 67%,#f55600 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* ─────────────────────────────────────────────
+   BUTTONS
+───────────────────────────────────────────── */
+.btn-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-row.left-row { justify-content: flex-start; }
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 999px;
+  padding: 10px 20px;
+  white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+
+/* filled blue */
+.btn-fill { background: #0071e3; color: #fff; border: 1px solid #0071e3; }
+.btn-fill:hover { background: #0077ed; }
+
+/* outline variants */
+.btn-ring { background: transparent; }
+.light-ring { color: #2997ff; border: 1px solid #2997ff; }
+.light-ring:hover { background: #2997ff; color: #fff; }
+.dark-ring  { color: #0071e3; border: 1px solid #0071e3; }
+.dark-ring:hover { background: #0071e3; color: #fff; }
+
+/* white variants (on dark/coloured bg) */
+.white-fill { background: #fff; color: #000; border: 1px solid #fff; }
+.white-fill:hover { background: #d2e9ff; }
+.white-ring { color: #fff; border: 1px solid #fff; }
+.white-ring:hover { background: rgba(255,255,255,.2); }
+
+.wide { min-width: 155px; }
+.sm-btn { font-size: 13px; padding: 8px 16px; width: 150px; }
+
+/* ─────────────────────────────────────────────
+   POSTER BACKGROUNDS  — images/ folder
+───────────────────────────────────────────── */
+/* mobile backgrounds */
+.pro1       { background-image: url(images/pro1.jpg);     justify-content: flex-start; padding-top: 350px; padding-bottom: 0; }
+.pro2       { background-image: url(images/blue1.jpg);    justify-content: flex-start; padding-top: 36px; padding-bottom: 0; }
+.gift-poster{ background-image: url(images/gift.jpg);     display: none; }
+.tab-poster { background-image: url(images/tab1.jpg);     justify-content: flex-start; padding-top: 36px; padding-bottom: 0; }
+
+/* mobile product cards */
+.pod-poster   { background-image: url(images/airpod1.jpg); }
+.watch-poster { background-image: url(images/watch1.jpg);  justify-content: flex-start; padding-top: 46px; padding-bottom: 0; }
+.mac-poster   { background-image: url(images/macAir.jpg);  justify-content: flex-start; padding-top: 46px; padding-bottom: 0; }
+.biz-poster   { background-image: url(images/business1.png); justify-content: flex-start; padding-top: 46px; padding-bottom: 0; }
+.deals-poster { background-image: url(images/deals.jpg); }
+.trade-poster { background-image: url(images/trade.jpg);   justify-content: flex-start; padding-top: 46px; padding-bottom: 0; }
+
+/* ─────────────────────────────────────────────
+   MOBILE CARDS / GRID VISIBILITY
+───────────────────────────────────────────── */
+.mobile-cards { display: block; }
+.product-grid { display: none; }
+
+/* ─────────────────────────────────────────────
+   MOVIE SCROLL
+───────────────────────────────────────────── */
+.scroll-section {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.scroll-track {
+  display: flex;
+  gap: 8px;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 0 8px 4px;
+}
+.scroll-track::-webkit-scrollbar { display: none; }
+
+.movie-card { width: 274px;
+  height: 460px;
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+ background-repeat: no-repeat;
+ background-size: cover;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* drama bar — hidden on mobile, shown on tablet+ */
+.drama-bar {
+  display: none;
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 40px 20px 20px;
+  background: linear-gradient(to top,rgba(0,0,0,.7),transparent);
+  flex-direction: column;
+  gap: 10px;
+}
+.drama-text { color: #fff; font-size: 15px; line-height: 1.45; max-width: 400px; }
+.drama-bold { font-weight: 700; }
+
+/* movie image backgrounds — images/ folder */
+.m1 { background-image: url(images/movie1.jpg); }
+.m2 { background-image: url(images/movie2.jpg); }
+.m3 { background-image: url(images/movie3.jpg); }
+.m4 { background-image: url(images/movie4.jpg); }
+.m5 { background-image: url(images/movie5.jpg); }
+.m6 { background-image: url(images/movie6.jpg); }
+.m7 { background-image: url(images/movie7.jpg); }
+.m8 { background-image: url(images/movie8.jpg); }
+
+/* scroll dots */
+.scroll-dots {
+  display: flex; gap: 8px;
+  justify-content: center; align-items: center;
+  padding: 4px 0;
+}
+.scroll-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #000; opacity: .25;
+  cursor: pointer;
+  transition: opacity .25s, width .25s;
+}
+.scroll-dot.active { opacity: .8; width: 20px; border-radius: 4px; }
+
+/* ─────────────────────────────────────────────
+   ANIMATION STRIP
+───────────────────────────────────────────── */
+.anim-section {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 12px;
+  position: relative;
+  padding-bottom: 24px;
+}
+.anim-track {
+  display: flex;
+  gap: 8px;
+  width: max-content;
+  animation: marquee 22s linear infinite;
+}
+.anim-section.paused .anim-track { animation-play-state: paused; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.anim-card {
+  width: 238px; height: 160px;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.anim-label {
+  position: absolute;
+  bottom: 10px; left: 12px;
+  font-size: 12px; font-weight: 700;
+  color: #fff; line-height: 1.3;
+  width: 130px;
+  text-shadow: 0 1px 4px rgba(0,0,0,.6);
+}
+.rb-pos { left: 128px; bottom: 26px; width: 96px; }
+
+.anim-thumb {
+  width: 108px; height: 108px;
+  border-radius: 8px;
+  position: absolute;
+  top: 12px; left: 12px;
+  object-fit: cover;
+}
+.anim-logo {
+  position: absolute;
+  bottom: 10px; right: 10px;
+  height: 12px; width: auto;
+}
+.anim-logo2 { right: auto; left: 128px; bottom: 10px; }
+
+/* anim card backgrounds — images/ folder */
+.ac-fit1 { background-image: url(images/fitness1.jpg); }
+.ac-fit2 { background-image: url(images/fitness.jpg); }
+.ac-rb   { background-color: #1b2632; }
+.ac-nba  { background-image: url(images/sport.jpg); }
+
+/* play/pause */
+.play-pause-btn {
+  position: absolute;
+  bottom: 28px; right: 16px;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.45);
+  border: none;
+  color: #fff;
+  font-size: 8px; letter-spacing: 1px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; padding: 0;
+  transition: background .2s;
+}
+.play-pause-btn:hover { background: rgba(0,0,0,.7); }
+
+
+/* ═════════════════════════════════════════════
+   TABLET  ≥ 655px
+═════════════════════════════════════════════ */
+@media screen and (min-width: 655px) {
+.nav-icons{gap: 20px;}
+  /* swap poster backgrounds */
+  .pro1       { background-image: url(images/pro2.jpg); height: 650px; padding-top: 58px; }
+  .pro2       { background-image: url(images/blue2.jpg); height: 650px; }
+  .tab-poster { background-image: url(images/tab2.jpg); height: 650px; }
+
+  /* typography */
+  .ptitle { font-size: 42px; font-weight: 600; line-height: 1.3; }
+  .psub   { font-size: 22px; max-width: 440px; }
+  .colorful { font-size: 18px; padding-top: 380px;}
+
+  /* buttons */
+  button { font-size: 16px; padding: 12px 22px; }
+  .sm-btn { font-size: 14px; padding: 10px 18px; }
+
+  /* hide mobile cards, show 2-col grid */
+  .mobile-cards { display: none; }
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .grid-cell {
+    height: 490px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 20px 36px;
+  }
+  /* grid cell backgrounds — images/ folder */
+  .g-pod   { background-image: url(images/airpod1.jpg); }
+  .g-watch { background-image: url(images/watch1.jpg);   justify-content: flex-start; padding-top: 46px; padding-bottom: 0; }
+  .g-mac   { background-image: url(images/macAir.jpg);   justify-content: flex-start; padding-top: 46px; padding-bottom: 0; }
+  .g-biz   { background-image: url(images/business1.png);justify-content: flex-start; padding-top: 46px; padding-bottom: 0; }
+  .g-deals { background-image: url(images/deals.jpg); }
+  .g-trade { background-image: url(images/trade.jpg);    justify-content: flex-start; padding-top: 46px; padding-bottom: 0; }
+
+  .grid-cell .poster-content { width: 100%; }
+
+
+  /* movie scroll — wider cards, drama bar visible */
+  .movie-card { width: 520px; height: 500px; flex: 0 0 auto;
+  scroll-snap-align: center;
+ background-repeat: no-repeat;background-size: auto;
+ background-size: cover;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden; }
+  .drama-bar  { display: flex; }
+
+  /* anim strip wider */
+  .anim-card { width: 280px; height: 190px; }
+}
+
+
+/* ═════════════════════════════════════════════
+   DESKTOP  ≥ 1000px
+═════════════════════════════════════════════ */
+@media screen and (min-width: 1000px) {
+
+  /* navbar */
+  .navi { height: 44px; justify-content: center; padding: 0; }
+  .nav-apple { width: 52px; }
+  .nav-links { display: flex; gap: 22px; align-items: center; height: 44px; }
+  .hamburger { display: none; }
+  .nav-icons  { gap: 10px;padding-left: 20px;  }
+
+  /* poster backgrounds */
+  .pro1       { background-image: url(images/pro3.jpg); height: 692px; padding-top: 60px; }
+  .pro2       { background-image: url(images/blue3.jpg); height: 692px; padding-top: 36px; }
+  .tab-poster { background-image: url(images/tab3.jpg); height: 692px; }
+  .gift-poster{ height: 692px; }
+  .gift-poster { display: flex; height: 650px; justify-content: center; padding-top: 0; }
+  .tab-poster{display: none;}
+  .padda {padding-top: 350px;}
+
+  /* typography */
+  .ptitle   { font-size: 52px; letter-spacing: -.28px; }
+  .psub     { font-size: 24px; }
+  .colorful { font-size: 20px; }
+
+  /* buttons */
+  button { font-size: 17px; padding: 13px 24px; }
+  .wide  { min-width: 165px; }
+
+  /* grid taller */
+  .grid-cell { height: 580px; }
+
+  /* grid backgrounds swap to web versions */
+  .g-pod   { background-image: url(images/airpod1.jpg); }
+  .g-watch { background-image: url(images/watchWeb.jpg); }
+  .g-mac   { background-image: url(images/webAir.jpg); }
+  .g-biz   { background-image: url(images/business1.png); }
+  .g-deals { background-image: url(images/deals.jpg); }
+  .g-trade { background-image: url(images/webTrade.jpg); }
+
+  /* movie scroll */
+  .movie-card { width: 689px; height: 700px;
+    
+ }
+
+  /* anim cards */
+  .anim-card { width: 320px; height: 210px; }
+}

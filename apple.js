@@ -1,135 +1,59 @@
-const carousel = document.getElementById("carousel");
-const indicators = document.querySelectorAll(".indicator a");
-const boxes = document.querySelectorAll(".box");
+// =============================================
+// SCROLL DOTS — synced to movie scroll track
+// =============================================
+(function () {
+  const track = document.getElementById("scrollTrack");
+  const dotsContainer = document.getElementById("scrollDots");
+  if (!track || !dotsContainer) return;
 
-// Click on indicators to scroll
-indicators.forEach((indicator, index) => {
-  indicator.addEventListener("click", () => {
-    const boxWidth = boxes[0].offsetWidth;
-    const gap = 12;
-    carousel.scrollLeft = index * (boxWidth + gap);
+  const cards = Array.from(track.querySelectorAll(".movie-card"));
+  let currentDot = 0;
+
+  // Build dots
+  cards.forEach((_, i) => {
+    const dot = document.createElement("span");
+    dot.className = "scroll-dot" + (i === 0 ? " active" : "");
+    dot.addEventListener("click", () => {
+      cards[i].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    });
+    dotsContainer.appendChild(dot);
   });
-});
 
-// Update active indicator on scroll
-carousel.addEventListener("scroll", () => {
-  const scrollLeft = carousel.scrollLeft;
-  const boxWidth = boxes[0].offsetWidth;
-  const gap = 12;
-  const currentIndex = Math.round(scrollLeft / (boxWidth + gap));
+  const dots = Array.from(dotsContainer.querySelectorAll(".scroll-dot"));
 
-  indicators.forEach((indicator, index) => {
-    indicator.classList.toggle("active", index === currentIndex);
+  // Update active dot on scroll
+  track.addEventListener("scroll", () => {
+    const scrollLeft = track.scrollLeft;
+    const cardWidth = cards[0]?.offsetWidth + 12 || 286; // card + gap
+    const idx = Math.round(scrollLeft / cardWidth);
+    if (idx !== currentDot && idx >= 0 && idx < dots.length) {
+      dots[currentDot].classList.remove("active");
+      dots[idx].classList.add("active");
+      currentDot = idx;
+    }
+  }, { passive: true });
+})();
+
+// =============================================
+// ANIMATION STRIP — play / pause toggle
+// =============================================
+(function () {
+  const btn = document.getElementById("playBtn");
+  const section = btn?.closest(".anim-section");
+  if (!btn || !section) return;
+
+  let paused = false;
+
+  btn.addEventListener("click", () => {
+    paused = !paused;
+    if (paused) {
+      section.classList.add("paused");
+      btn.innerHTML = "&#9654;"; // play triangle
+      btn.title = "Play animation";
+    } else {
+      section.classList.remove("paused");
+      btn.innerHTML = "&#9646;&#9646;"; // pause bars
+      btn.title = "Pause animation";
+    }
   });
-});
-
-const carousel = document.getElementById("carousel");
-const indicatorsContainer = document.getElementById("indicators");
-const pauseBtn = document.getElementById("pauseBtn");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-const boxes = document.querySelectorAll(".box");
-
-let currentIndex = 0;
-let autoPlayInterval;
-let isAutoPlaying = true;
-
-// Create indicator dots
-boxes.forEach((_, index) => {
-  const dot = document.createElement("div");
-  dot.className = "dot";
-  dot.dataset.index = index;
-  if (index === 0) dot.classList.add("active");
-  indicatorsContainer.appendChild(dot);
-});
-
-const dots = document.querySelectorAll(".dot");
-
-function scrollToIndex(index) {
-  const boxWidth = boxes[0].offsetWidth;
-  const gap = 20;
-  carousel.scrollLeft = index * (boxWidth + gap);
-  currentIndex = index;
-  updateIndicators();
-}
-
-function updateIndicators() {
-  dots.forEach((dot, index) => {
-    dot.classList.toggle("active", index === currentIndex);
-  });
-}
-
-function nextSlide() {
-  currentIndex = (currentIndex + 1) % boxes.length;
-  scrollToIndex(currentIndex);
-}
-
-function prevSlide() {
-  currentIndex = (currentIndex - 1 + boxes.length) % boxes.length;
-  scrollToIndex(currentIndex);
-}
-
-function startAutoPlay() {
-  autoPlayInterval = setInterval(nextSlide, 3000);
-  isAutoPlaying = true;
-  pauseBtn.classList.add("active");
-  pauseBtn.textContent = "Auto-Play";
-}
-
-function stopAutoPlay() {
-  clearInterval(autoPlayInterval);
-  isAutoPlaying = false;
-  pauseBtn.classList.remove("active");
-  pauseBtn.textContent = "Paused";
-}
-
-// Click on indicators
-dots.forEach((dot) => {
-  dot.addEventListener("click", () => {
-    stopAutoPlay();
-    scrollToIndex(parseInt(dot.dataset.index));
-  });
-});
-
-// Update indicators on manual scroll
-carousel.addEventListener("scroll", () => {
-  const scrollLeft = carousel.scrollLeft;
-  const boxWidth = boxes[0].offsetWidth;
-  const gap = 20;
-  const newIndex = Math.round(scrollLeft / (boxWidth + gap));
-
-  if (newIndex !== currentIndex) {
-    currentIndex = newIndex;
-    updateIndicators();
-  }
-});
-
-// Control buttons
-pauseBtn.addEventListener("click", () => {
-  if (isAutoPlaying) {
-    stopAutoPlay();
-  } else {
-    startAutoPlay();
-  }
-});
-
-prevBtn.addEventListener("click", () => {
-  stopAutoPlay();
-  prevSlide();
-});
-
-nextBtn.addEventListener("click", () => {
-  stopAutoPlay();
-  nextSlide();
-});
-
-// Start auto-play on load
-startAutoPlay();
-
-// Pause on hover
-carousel.addEventListener("mouseenter", stopAutoPlay);
-carousel.addEventListener("mouseleave", () => {
-  if (pauseBtn.classList.contains("active")) {
-    startAutoPlay();
-  }
-});
+})();
